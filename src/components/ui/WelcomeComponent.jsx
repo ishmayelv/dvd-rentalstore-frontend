@@ -16,7 +16,7 @@ class WelcomeComponent extends Component {
 	render() {
 		return (
 			<>
-				<h1>Welcome!</h1>
+				<h4> List of Available Films !</h4>
 				<div className="container">
 					Welcome <b>{this.props.match.params.name},</b>
                     You can manage your todos <Link to="/todos">here</Link>.

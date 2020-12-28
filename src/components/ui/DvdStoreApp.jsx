@@ -10,7 +10,7 @@ import LogoutComponent from './LogoutComponent.jsx'
 import WelcomeComponent from './WelcomeComponent.jsx'
 import TodoComponent from './TodoComponent.jsx'
 
-class RPApplication extends Component {
+class DvdStoreApp extends Component {
 	render() {
 		return (
 			<div className="TodoApp">
@@ -21,7 +21,7 @@ class RPApplication extends Component {
 							<Route path="/" exact component={LoginComponent} />
 							<Route path="/login" component={LoginComponent} />
 							<AuthenticatedRoute path="/welcome/:name" component={WelcomeComponent} />
-							<AuthenticatedRoute path="/todos/:id" component={TodoComponent} />
+							<AuthenticatedRoute path="/todos/:id" component={TodoComponent} />n
 							<AuthenticatedRoute path="/todos" component={ListTodosComponent} />
 							<AuthenticatedRoute path="/logout" component={LogoutComponent} />
 							<Route component={ErrorComponent} />
@@ -34,4 +34,4 @@ class RPApplication extends Component {
 	}
 }
 
-export default RPApplication
+export default DvdStoreApp

@@ -1,10 +1,7 @@
 import axios from 'axios'
-class AuthenticationService {
 
-    executeBasicAuthenticationService(username, password) {
-        return axios.get('http://localhost:8080/basicauth',
-            { headers: { authorization: this.createBasicAuthToken(username, password) } })
-    }
+class AuthenticationService {
+ 
 
     executeJwtAuthenticationService(username, password) {
         console.log("AuthenticationService.js : executeJwtAuthenticationService --->");
@@ -17,6 +14,7 @@ class AuthenticationService {
     createBasicAuthToken(username, password) {
         return 'Basic ' + window.btoa(username + ":" + password)
     }
+
     registerSuccessfulLogin(username, password) {
         //let basicAuthHeader = 'Basic ' +  window.btoa(username + ":" + password)
         //console.log('registerSuccessfulLogin')
@@ -59,4 +57,5 @@ class AuthenticationService {
         )
     }
 }
+
 export default new AuthenticationService()

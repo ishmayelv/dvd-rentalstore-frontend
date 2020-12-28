@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import RPApplication from './components/ui/RPApplication'
+import DvdStoreApp from './components/ui/DvdStoreApp'
 import './App.css';
 import './bootstrap.css';
 
@@ -9,7 +9,7 @@ class App extends Component {
 		return (
 			<div className="App">
 				
-                <RPApplication />
+                <DvdStoreApp />
 			</div>
 		);
 	}
