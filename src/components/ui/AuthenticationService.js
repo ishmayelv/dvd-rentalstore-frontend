@@ -28,7 +28,9 @@ class AuthenticationService {
     }
 
     createJWTToken(token) {
-        return 'Bearer '+token
+        let userToken = 'Bearer ' + token
+        sessionStorage.setItem("USER_TOKEN", userToken)
+        return userToken
     }
        
     logout() {
@@ -50,7 +52,8 @@ class AuthenticationService {
         axios.interceptors.request.use(
             (config) => {
                 if (this.isUserLoggedIn()) {
-                    config.headers.authorization = token
+                  //  config.headers.authorization = token
+                    config.headers.authorization = sessionStorage.getItem("USER_TOKEN")
                 }
                 return config
             }
