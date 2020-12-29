@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
 
 import AuthenticationService from './AuthenticationService.js'
-import moment from 'moment'
+
 
 import TodoDataService from '../../api/todo/TodoDataService.js'
+
 import DvdStoreService from '../../api/dvdstore/DvdStoreService.js'
+ 
 
 class TopRentedFilmsComp extends Component {
+
 
 	constructor(props) {
 		console.log('constructor')
@@ -36,7 +39,6 @@ class TopRentedFilmsComp extends Component {
 	componentDidMount() {
 		console.log('componentDidMount')
 		this.refreshTodos();
-		console.log(this.state)
     }
 
    /* refreshTodos() {       
@@ -48,7 +50,26 @@ class TopRentedFilmsComp extends Component {
                 }
             )
     }*/
-    
+
+    deleteTodoClicked(id) {
+        let username = AuthenticationService.getLoggedInUserName()
+        TodoDataService.deleteTodo(username, id)
+            .then(
+                response => {
+                    this.setState({ message: `Delete of todo ${id} Successful` })
+                    this.refreshTodos()
+                }
+            )
+    }
+
+    addTodoClicked() {
+        this.props.history.push('/todos/-1')
+    }
+    updateTodoClicked(id) {
+        console.log('update ' + id)
+        this.props.history.push(`/todos/${id}`)
+    }
+
     refreshTodos() {
         console.log("Calling TopRented Movies");
 		let username = AuthenticationService.getLoggedInUserName()
@@ -56,65 +77,47 @@ class TopRentedFilmsComp extends Component {
 			.then(
 				response => {
                     this.setState({ topRentedFilms: response.data })
-                    console.log(" response.data "+response.data);
-				}
-			)
+            })      
     }
 
-
-	deleteTodoClicked(id) {
-		let username = AuthenticationService.getLoggedInUserName()
-		TodoDataService.deleteTodo(username, id)
-			.then(
-				response => {
-					this.setState({ message: `Delete of todo ${id} Successful` })
-					this.refreshTodos()
-				}
-			)
-    }
-
-	addTodoClicked() {
-		this.props.history.push('/todos/-1')
-	}
-	updateTodoClicked(id) {
-		console.log('update ' + id)
-        this.props.history.push(`/todos/${id}`)
-	}
-
+    
+    
 	render() {
-		console.log('render')
-		return (
-			<div>
-				<h1>Top Rented Films </h1>
+        return (
+
+            <div className="container" align="center">
+                <h4>Top & Least Rented Films By Category</h4>
                 {this.state.message && <div className="alert alert-success">{this.state.message}</div>}
-				<div className="container">
-                    <table className="table table-fixed">
-						<thead >
-							<tr>
-                                <th scope="col">Category</th>
-                                <th scope="col">Demand</th>
-                                <th scope="col">Sales</th>
-							</tr>
-						</thead>
-						<tbody>
-                            {
-                                this.state.topRentedFilms.map(
-                                    (topRentedCat, i) =>
-                                        <tr key={i}>
-                                            <td >{topRentedCat.movieName}</td>
-                                            <td >{topRentedCat.totalDemand}</td>
-                                            <td >{topRentedCat.totalSales}</td>
-                                    </tr>
-								)
-							}
-						</tbody>
-					</table>
-					<div className="row">
-						<button className="btn btn-success" onClick={this.addTodoClicked}>Add</button>
-					</div>
-				</div>
+                  
+                <div className="row" >
+                    <div class="col-xs-12">
+                        <table className="table-sm table-striped table-bordered" >
+						    <thead >
+							    <tr>
+                                    <th align="left">Category</th>
+                                    <th align="right">Demand</th>
+                                    <th align="right">Sales</th>
+							    </tr>
+						    </thead>
+						    <tbody>
+                                {
+                                    this.state.topRentedFilms.map(
+                                        (topRentedCat, i) =>
+                                            <tr key={i}>
+                                                <td align="left">{topRentedCat.movieName}</td>
+                                                <td align="right">{topRentedCat.totalDemand}</td>
+                                                <td align="right">{topRentedCat.totalSales}</td>
+                                        </tr>
+								    )
+							    }
+						    </tbody>
+                        </table>
+                    </div>
+
+                    
+                </div>
 			</div>
 		)
 	}
-}
+} 
 export default TopRentedFilmsComp

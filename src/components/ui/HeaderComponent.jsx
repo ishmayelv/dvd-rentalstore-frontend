@@ -20,7 +20,7 @@ class HeaderComponent extends Component {
 
                         {isUserLoggedIn && <li><Link className="nav-link" to="/topRentedFilms">Top Rented Films</Link></li>}
 
-                        {isUserLoggedIn && <li><Link className="nav-link" to="/todos2">Users Rented Movies</Link></li>}
+                        {isUserLoggedIn && <li><Link className="nav-link" to="/distinctUsersByCategory">Distict Users Rented Category</Link></li>}
 
                         {isUserLoggedIn && <li><Link className="nav-link" to="/todos3">Avg Rental Rate</Link></li>}
 

@@ -7,6 +7,11 @@ class DvdStoreService {
         console.log('Calling getTopRentedMovies --')
         return axios.get(`${DVD_JPA_API_URL}/toprentcategories`);
     }
+    getDistinctUsesRentedByCat() {
+        console.log('Calling getDistinctUsesRentedByCat --')
+        return axios.get(`${DVD_JPA_API_URL}/distinctUsersRentedByCategory`);
+    }
+
 
 
 
