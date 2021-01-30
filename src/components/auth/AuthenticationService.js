@@ -1,8 +1,6 @@
 import axios from 'axios'
 
 class AuthenticationService {
- 
-
     executeJwtAuthenticationService(username, password) {
         console.log("AuthenticationService.js : executeJwtAuthenticationService --->");
         return axios.post('http://localhost:8080/authenticate', {
@@ -36,6 +34,7 @@ class AuthenticationService {
     logout() {
         sessionStorage.removeItem('authenticatedUser');
     }
+
     isUserLoggedIn() {       
         let user = sessionStorage.getItem('authenticatedUser')
         if (user===null) return false
@@ -59,6 +58,7 @@ class AuthenticationService {
             }
         )
     }
+
 }
 
 export default new AuthenticationService()

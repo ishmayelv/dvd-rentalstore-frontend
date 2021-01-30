@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom'
-import AuthenticationService from './AuthenticationService.js'
+import AuthenticationService from './auth/AuthenticationService.js'
 
 class HeaderComponent extends Component {
 	render() {
         const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
-        
-		return (
+        return (
 			<header>
 				<nav className="navbar navbar-expand-md navbar-dark bg-dark">
 					<div><a href="#" className="navbar-brand">DVD Store</a></div>
@@ -15,7 +14,7 @@ class HeaderComponent extends Component {
                     <ul className="navbar-nav">
                         {isUserLoggedIn && <li><Link className="nav-link" to="/welcome/ishmayel">Home</Link></li>}
 
-                        {isUserLoggedIn && <li><Link className="nav-link" to="/todos5">Rent A Film</Link></li>}
+                        {isUserLoggedIn && <li><Link className="nav-link" to="/rentAFilm">Rent A Film</Link></li>}
 
 
                         {isUserLoggedIn && <li><Link className="nav-link" to="/topRentedFilms">Top Rented Films</Link></li>}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import AuthenticationService from './AuthenticationService.js'
+import { Route, Redirect } from 'react-router-dom';
+import AuthenticationService from './auth/AuthenticationService'
 
 class LoginComponent extends Component {
 	constructor(props) {
@@ -14,11 +15,9 @@ class LoginComponent extends Component {
 		this.loginClicked = this.loginClicked.bind(this)
 	}
 	handleChange(event) {	
-		this.setState(
-			{
-				[event.target.name]: event.target.value
-			}
-		)
+		this.setState({
+			[event.target.name]: event.target.value
+		})
 	}
     loginClicked() {
         AuthenticationService
@@ -31,22 +30,35 @@ class LoginComponent extends Component {
                 this.setState({ showSuccessMessage: false })
                 this.setState({ hasLoginFailed: true })
             })
-	}
-	render() {
-		return (
-			<div>
-				<h1>Login</h1>
-				<div className="container">		
+    }
+
+    render() {
+        let login = (
+            <div>
+                <h1>Login</h1>
+                <div className="container">
                     {this.state.hasLoginFailed && <div className="alert alert-warning">Invalid Credentials</div>}
                     {this.state.showSuccessMessage && <div>Login Sucessful</div>}
                     User Name:<input type="text" name="username" value={this.state.username} onChange={this.handleChange} />
                     Password: <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
                     <button className="btn btn-success" onClick={this.loginClicked}>Login</button>
 
-				</div>
-			</div>
-		)
-	}
+                </div>
+            </div>
+        ); 
+
+        //check if the user is logged in or not, if not logged in redirect to log-in page
+        const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
+        if (isUserLoggedIn) {
+            login = <Redirect to="/welcome/'${isUserLoggedIn}'"/>
+        } 
+
+        return login; 
+    }
 }
+
+
+
+
 
 export default LoginComponent

@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import HelloWorldService from '../../api/todo/HelloWorldService.js'
+import HelloWorldService from '../api/todo/HelloWorldService.js'
 
 class WelcomeComponent extends Component {
-	constructor(props) {
+
+    constructor(props) {
 		super(props)
 		this.retrieveWelcomeMessage = this.retrieveWelcomeMessage.bind(this)
 		this.state = {
@@ -32,18 +33,12 @@ class WelcomeComponent extends Component {
 
 			</>
 		)
-	}
-	retrieveWelcomeMessage() {
-		// HelloWorldService.executeHelloWorldService()
-        // .then( response => this.handleSuccessfulResponse(response) )
+    }
 
-        // HelloWorldService.executeHelloWorldBeanService()
-        // .then( response => this.handleSuccessfulResponse(response) )
-
+    retrieveWelcomeMessage() {	
         HelloWorldService.executeHelloWorldPathVariableService(this.props.match.params.name)
             .then(response => this.handleSuccessfulResponse(response))
             .catch(error => this.handleError(error))
-
 	}
 
 	handleSuccessfulResponse(response) {

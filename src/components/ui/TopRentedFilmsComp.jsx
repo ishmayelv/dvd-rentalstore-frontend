@@ -1,15 +1,12 @@
 import React, { Component } from 'react'
 
-import AuthenticationService from './AuthenticationService.js'
-
+import AuthenticationService from '../auth/AuthenticationService'
 
 import TodoDataService from '../../api/todo/TodoDataService.js'
-
 import DvdStoreService from '../../api/dvdstore/DvdStoreService.js'
  
 
 class TopRentedFilmsComp extends Component {
-
 
 	constructor(props) {
 		console.log('constructor')
@@ -41,16 +38,6 @@ class TopRentedFilmsComp extends Component {
 		this.refreshTodos();
     }
 
-   /* refreshTodos() {       
-        let username = AuthenticationService.getLoggedInUserName()
-        TodoDataService.retrieveAllTodos(username)
-            .then(
-                response => {
-                    this.setState({ todos: response.data })
-                }
-            )
-    }*/
-
     deleteTodoClicked(id) {
         let username = AuthenticationService.getLoggedInUserName()
         TodoDataService.deleteTodo(username, id)
@@ -75,7 +62,8 @@ class TopRentedFilmsComp extends Component {
 		let username = AuthenticationService.getLoggedInUserName()
         DvdStoreService.getTopRentedCategory()
 			.then(
-				response => {
+            response => {
+                console.log("Top rented films - response.data:" + response.data);
                     this.setState({ topRentedFilms: response.data })
             })      
     }

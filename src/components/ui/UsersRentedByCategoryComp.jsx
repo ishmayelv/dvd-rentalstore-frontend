@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import AuthenticationService from './AuthenticationService.js' 
+import AuthenticationService from '../auth/AuthenticationService.js' 
 import DvdStoreService from '../../api/dvdstore/DvdStoreService.js'
  
 class UsersRentedByCategoryComp extends Component {
